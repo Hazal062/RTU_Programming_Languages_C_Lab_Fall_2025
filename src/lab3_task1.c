@@ -1,70 +1,54 @@
 /*
  * Lab 3, Task 1
- * Student Name, Student ID
+ * Name: Hazal Guc
+ * Student ID: 231ADB264
  *
  * Implement array algorithms:
- *   - find minimum value
- *   - find maximum value
- *   - calculate sum
- *   - calculate average
- *
- * Rules:
- *   - Write separate functions for each operation.
- *   - Work with int arrays.
- *   - Average should return a float.
- *
- * Example:
- *   int arr[] = {1, 2, 3, 4, 5};
- *   min = array_min(arr, 5); // 1
- *   max = array_max(arr, 5); // 5
- *   sum = array_sum(arr, 5); // 15
- *   avg = array_avg(arr, 5); // 3.0
+ * - find minimum value
+ * - find maximum value
+ * - calculate sum
+ * - calculate average
  */
 
 #include <stdio.h>
-#include <limits.h>
 
-// Function prototypes
-int array_min(int arr[], int size);
-int array_max(int arr[], int size);
-int array_sum(int arr[], int size);
-float array_avg(int arr[], int size);
+int array_min(const int arr[], int size) {
+  if (size <= 0) return 0;
+  int m = arr[0];
+  for (int i = 1; i < size; i++)
+    if (arr[i] < m) m = arr[i];
+  return m;
+}
+
+int array_max(const int arr[], int size) {
+  if (size <= 0) return 0;
+  int m = arr[0];
+  for (int i = 1; i < size; i++)
+    if (arr[i] > m) m = arr[i];
+  return m;
+}
+
+int array_sum(const int arr[], int size) {
+  long long s = 0;
+  for (int i = 0; i < size; i++) s += arr[i];
+  return (int)s;
+}
+
+float array_avg(const int arr[], int size) {
+  if (size <= 0) return 0.0f;
+  long long s = 0;
+  for (int i = 0; i < size; i++) s += arr[i];
+  return (float)s / size;
+}
 
 int main(void) {
-    int arr[] = {10, 20, 5, 30, 15};
-    int size = 5;
+  int arr[] = {10, 20, 5, 30, 15};
+  int n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("Min: %d\n", array_min(arr, size));
-    printf("Max: %d\n", array_max(arr, size));
-    printf("Sum: %d\n", array_sum(arr, size));
-    printf("Avg: %.2f\n", array_avg(arr, size));
+  printf("Min: %d\n", array_min(arr, n));
+  printf("Max: %d\n", array_max(arr, n));
+  printf("Sum: %d\n", array_sum(arr, n));
+  printf("Avg: %.2f\n", array_avg(arr, n));
 
-    return 0;
-}
-
-// Implement functions below
-int array_min(int arr[], int size) {
-    // TODO: return smallest element
-    int my_min = INT_MAX; //set to max infinity
-    for (int i=0;i<size;i++) {
-        if (my_min > arr[i]) {
-            my_min = arr[i];
-        }
-    }
-    return my_min; // placeholder
-}
-
-int array_max(int arr[], int size) {
-    // TODO: return largest element
-    return 0; // placeholder
-}
-
-int array_sum(int arr[], int size) {
-    // TODO: return sum of elements
-    return 0; // placeholder
-}
-
-float array_avg(int arr[], int size) {
-    // TODO: return average as float
-    return 0.0f; // placeholder
+  return 0;
 }

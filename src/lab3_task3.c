@@ -1,50 +1,57 @@
 /*
  * Lab 3, Task 3
- * Student Name, Student ID
+ * Name: Hazal Guc
+ * Student ID: 231ADB264
  *
- * Implement basic string handling functions.
- * Write your own versions of:
- *   - my_strlen (finds string length)
- *   - my_strcpy (copies string from src to dest)
+ * Manual string handling:
+ *  - implement my_strlen (count chars, not including '\0')
+ *  - implement my_strcpy (copy src -> dest including '\0')
  *
  * Rules:
- *   - Do not use <string.h> functions for strlen/strcpy.
- *   - Use loops and manual pointer/array access.
- *
- * Example:
- *   char s[] = "hello";
- *   int len = my_strlen(s);   // should return 5
- *
- *   char buffer[100];
- *   my_strcpy(buffer, s);     // buffer now contains "hello"
+ *  - Do NOT use <string.h> (no strlen/strcpy)
+ *  - Use loops or pointer arithmetic.
  */
 
 #include <stdio.h>
 
-// Function prototypes
+/* prototypes (given by template) */
 int my_strlen(const char *str);
 void my_strcpy(char *dest, const char *src);
 
-int main(void) {
-    // TODO: Test your functions here
-    char test[] = "Programming in C";
-    char copy[100];
+/* --- implementations --- */
 
-    int len = my_strlen(test);
-    printf("Length: %d\n", len);
-
-    my_strcpy(copy, test);
-    printf("Copy: %s\n", copy);
-
-    return 0;
-}
-
-// Implement functions below
 int my_strlen(const char *str) {
-    // TODO: count characters until '\0'
-    return 0; // placeholder
+  if (!str) return 0;  // null guard
+  int len = 0;
+  while (str[len] != '\0') {
+    len++;
+  }
+  return len;
 }
 
 void my_strcpy(char *dest, const char *src) {
-    // TODO: copy characters until '\0'
+  if (!dest || !src) return;  // null guard
+  // copy including the terminating '\0'
+  while ((*dest++ = *src++) != '\0') {
+    // nothing inside, assignment + check does the job
+  }
+}
+
+/* --- quick demo tests --- */
+int main(void) {
+  char text[] = "hello";
+  int len = my_strlen(text);
+  printf("len = %d\n", len);  // 5
+
+  char buffer[100];
+  my_strcpy(buffer, text);
+  printf("%s\n", buffer);  // hello
+
+  // extra tiny checks
+  char empty[] = "";
+  printf("len(empty) = %d\n", my_strlen(empty));  // 0
+  my_strcpy(buffer, "RTU");
+  printf("%s\n", buffer);  // RTU
+
+  return 0;
 }

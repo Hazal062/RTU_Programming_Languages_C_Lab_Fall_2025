@@ -1,46 +1,55 @@
 /*
  * Lab 3, Task 2
- * Student Name, Student ID
+ * Name: Hazal Guc
+ * Student ID: 231ADB264
  *
  * Practice using pointers as function parameters.
  * Implement:
- *   - swap (exchange values of two ints)
- *   - modify_value (multiply given int by 2)
+ *  - swap (exchange values of two ints)
+ *  - modify_value (multiply given int by 2)
  *
  * Rules:
- *   - Use pointers to modify variables in the caller.
- *   - Demonstrate changes in main.
+ *  - Use pointers to modify variables in the caller.
+ *  - Demonstrate changes in main.
  *
- * Example:
+ * Example (expected behavior):
  *   int a = 5, b = 10;
- *   swap(&a, &b);   // now a = 10, b = 5
- *
- *   modify_value(&a); // now a = 20
+ *   swap(&a, &b);        // now a = 10, b = 5
+ *   int x = 7;
+ *   modify_value(&x);    // now x = 14
  */
 
 #include <stdio.h>
 
-// Function prototypes
+/* Function prototypes (given by the template) */
 void swap(int *x, int *y);
 void modify_value(int *x);
 
-int main(void) {
-    int a = 3, b = 7;
-    printf("Before swap: a=%d, b=%d\n", a, b);
-    swap(&a, &b);
-    printf("After swap: a=%d, b=%d\n", a, b);
+/* --- Implementations --- */
 
-    modify_value(&a);
-    printf("After modify_value: a=%d\n", a);
-
-    return 0;
-}
-
-// Implement functions below
 void swap(int *x, int *y) {
-    // TODO: swap values using a temporary variable
+  if (!x || !y) return;  // defensive: null pointer guard
+  int t = *x;
+  *x = *y;
+  *y = t;
 }
 
 void modify_value(int *x) {
-    // TODO: multiply value by 2
+  if (!x) return;  // defensive: null pointer guard
+  *x *= 2;
+}
+
+/* --- Simple tests in main --- */
+int main(void) {
+  int a = 5, b = 10;
+  printf("Before swap: a=%d, b=%d\n", a, b);
+  swap(&a, &b);
+  printf("After  swap: a=%d, b=%d\n", a, b);  // a=10, b=5
+
+  int v = 7;
+  printf("Before modify_value: v=%d\n", v);
+  modify_value(&v);
+  printf("After  modify_value: v=%d\n", v);  // v=14
+
+  return 0;
 }
