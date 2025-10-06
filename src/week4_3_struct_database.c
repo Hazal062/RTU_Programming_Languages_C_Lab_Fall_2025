@@ -1,38 +1,78 @@
 /*
- * week4_3_struct_database.c
- * Author: [Your Name]
- * Student ID: [Your ID]
+ * File: week4_3_struct_database.c
+ * Author: Hazal Guc
+ * Student ID: 231ADB264
  * Description:
- *   Simple in-memory "database" using an array of structs.
- *   Students will use malloc to allocate space for multiple Student records,
- *   then input, display, and possibly search the data.
+ *   Build an in-memory database (array of Student structs) using malloc.
+ *   Read N students, then print a simple table. Free all allocated memory.
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// TODO: Define struct Student with fields name, id, grade
+#define NAME_LEN 50
+
+typedef struct {
+  char name[NAME_LEN];
+  int id;
+  float grade;
+} Student;
+
+static void read_line(char *buf, size_t sz) {
+  if (fgets(buf, sz, stdin)) {
+    size_t len = strlen(buf);
+    if (len && buf[len - 1] == '\n') buf[len - 1] = '\0';
+  }
+}
+
+static void clear_stdin(void) {
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF) {
+  }
+}
 
 int main(void) {
-    int n;
-    struct Student *students = NULL;
+  int n;
+  printf("Enter number of students: ");
+  if (scanf("%d", &n) != 1 || n <= 0) {
+    fprintf(stderr, "Invalid count.\n");
+    return 1;
+  }
+  clear_stdin();
 
-    printf("Enter number of students: ");
-    if (scanf("%d", &n) != 1 || n <= 0) {
-        printf("Invalid number.\n");
-        return 1;
+  Student *students = (Student *)malloc((size_t)n * sizeof *students);
+  if (!students) {
+    perror("malloc");
+    return 1;
+  }
+
+  for (int i = 0; i < n; i++) {
+    printf("Enter data for student %d\n", i + 1);
+
+    printf("  Name: ");
+    read_line(students[i].name, sizeof students[i].name);
+
+    printf("  ID: ");
+    while (scanf("%d", &students[i].id) != 1) {
+      clear_stdin();
+      printf("  ID: ");
     }
 
-    // TODO: Allocate memory for n Student structs using malloc
+    printf("  Grade: ");
+    while (scanf("%f", &students[i].grade) != 1) {
+      clear_stdin();
+      printf("  Grade: ");
+    }
+    clear_stdin();
+  }
 
-    // TODO: Read student data in a loop
+  printf("\n%-6s %-20s %s\n", "ID", "Name", "Grade");
+  for (int i = 0; i < n; i++) {
+    printf("%-6d %-20s %.1f\n", students[i].id, students[i].name,
+           students[i].grade);
+  }
 
-    // TODO: Display all student records in formatted output
-
-    // Optional: Compute average grade or find top student
-
-    // TODO: Free allocated memory
-
-    return 0;
+  free(students);
+  return 0;
 }
