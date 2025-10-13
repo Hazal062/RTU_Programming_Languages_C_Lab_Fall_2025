@@ -67,6 +67,41 @@ $(BUILD_DIR)/lab3_task3: $(SRC_DIR)/lab3_task3.c
 # -----------------------
 # Lab 4
 # -----------------------
+# ===============================
+# Week 5 - File I/O and Modular Programming
+# ===============================
+
+week5: $(BUILD_DIR)/week5_task1_file_io $(BUILD_DIR)/week5_task2_struct_save_load $(BUILD_DIR)/week5_task3_student_management_system
+	@echo "✅ Built all Week 5 tasks successfully."
+
+$(BUILD_DIR)/week5_task1_file_io: $(SRC_DIR)/week5_task1_file_io.c
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/week5_task2_struct_save_load: $(SRC_DIR)/week5_task2_struct_save_load.c
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/week5_task3_student_management_system: $(SRC_DIR)/week5_task3_student_management_system.c
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/week5_task4_struct_binary_io: $(SRC_DIR)/week5_task4_struct_binary_io.c
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) $< -o $@
+
+run1: $(BUILD_DIR)/week5_task1_file_io
+	$(BUILD_DIR)/week5_task1_file_io
+
+run2: $(BUILD_DIR)/week5_task2_struct_save_load
+	$(BUILD_DIR)/week5_task2_struct_save_load
+
+run3: $(BUILD_DIR)/week5_task3_student_management_system
+	$(BUILD_DIR)/week5_task3_student_management_system
+
+run4: $(BUILD_DIR)/week5_task4_struct_binary_io
+	$(BUILD_DIR)/week5_task4_struct_binary_io
+
 lab4: $(BUILD_DIR)/week4_1_dynamic_array $(BUILD_DIR)/week4_2_struct_student $(BUILD_DIR)/week4_3_struct_database
 
 $(BUILD_DIR)/week4_1_dynamic_array: $(SRC_DIR)/week4_1_dynamic_array.c
